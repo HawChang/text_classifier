@@ -16,7 +16,7 @@ data_feature_generator = feature_generator.card_qualification_data.CardDataFeatu
 
 # word_seg_type
 # 切词可选:结巴"jieba" 和 公司内部切词类"word_seg"
-word_seg_func = "jieba"
+word_seg_func = "word_seg"
 
 # 特征的最小长度
 feature_min_length = 2
@@ -26,7 +26,7 @@ stopwords_path = "data/dict/stopwords.txt"
 
 # 每行记录添加其生成的特征
 # 总体生成特征后 再划分训练集和验证集
-origin_data_feature_path = "data/origin_data_feature"
+origin_data_feature_path = "data/origin_data_feature.txt"
 
 # 划分训练集和测试集
 test_ratio = 0.1
@@ -39,6 +39,7 @@ train_data_path = "data/train.txt"
 train_data_feature_path = "data/train_feature.txt"
 test_data_path = "data/test.txt"
 test_data_feature_path = "data/test_feature.txt"
+# test_data_feature_path = "data/origin_data_feature"
 
 # 数据集各列之间的间隔符
 col_sep = "\t"
@@ -80,6 +81,13 @@ class_weight = {
 # 交叉校验确定系数C的fold数
 k_fold = 5
 
+# 预测时 给出特征作为证据的个数
+evidence_num = 10
+
+min_hit_feature = 3
+
+# 置信度阈值
+confidence = 0.65
 
 # 输出文件地址
 output_dir = "output"

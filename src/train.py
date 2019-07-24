@@ -61,8 +61,8 @@ class Trainer(object):
 		self.dump_pkl(model, config.model_path)
 		log.info("save model end. cost time = %.4fs" % (time.time() - start_time))
 		
-		log.info("model score")
-		print(model.score(data_vec, label_vec))
+		log.info("model score : %f" % model.score(data_vec, label_vec))
+		#print(model.score(data_vec, label_vec))
 		
 		log.info("save model start...")
 		start_time = time.time()
