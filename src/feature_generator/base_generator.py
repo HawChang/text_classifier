@@ -6,6 +6,7 @@
 # @Desc   : 
 import codecs
 import jieba
+#import word_segger
 
 
 class BaseFeatureGenerator(object):
@@ -17,6 +18,7 @@ class BaseFeatureGenerator(object):
 			"jieba": self.jieba_seg_words,
 			"word_seg": self.baidu_seg_words
 		}[word_seg_func]
+		#self._segger = word_segger.WordSegger() if word_seg_func == "word_seg" else None
 		self._ngram = ngram
 		self._encoding = encoding
 		self._stopwords = set() if stopwords_path is None else self.load_stopword_file(stopwords_path)
@@ -68,8 +70,7 @@ class BaseFeatureGenerator(object):
 		:param tar_string: 要切词的字符串 unicode或gbk均可（切词前要转成gb18030格式）
 		:return: 返回unicode编码的切词结果列表
 		"""
-		# TODO：实现功能
-		pass
+		return [x.strip().decode("gb18030") for x in self._segger.seg_words(tar_string.encode("gb18030", "ignore"))]
 	
 	def load_stopword_file(self, stopwords_path):
 		"""
@@ -83,9 +84,13 @@ class BaseFeatureGenerator(object):
 				stopwords_set.add(line.strip("\n"))
 		return stopwords_set
 	
+	def destroy(self):
+		if self._segger is not None:
+			self._segger.destroy()
+	
 
 if __name__ == "__main__":
-	generator = BaseFeatureGenerator("jieba", "data/dict/stopwords.txt")
+	generator = BaseFeatureGenerator("word_seg", "data/dict/stopwords.txt")
 	tests = [u"测试是否能够正常切词",
 	         u"测试一下]停用词的逻辑，是,否？能够正常切词"]
 	
