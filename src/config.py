@@ -74,8 +74,8 @@ Cs = [0.1,0.2,0.5,1,2,5,10,20]
 
 # 各类别的权重
 class_weight = {
-	0: 1,
-	1: 1
+    0: 1,
+    1: 1
 }
 
 # 交叉校验确定系数C的fold数
@@ -101,7 +101,7 @@ predict_dir = output_dir + "/pred_" + feature_type + "_" + model + ".txt"
 
 
 if not os.path.exists(output_dir):
-	os.mkdir(output_dir)
+    os.mkdir(output_dir)
 
 
 
