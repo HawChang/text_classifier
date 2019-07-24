@@ -1,0 +1,3 @@
+jieba
+sklearn <= 0.20.3
+numpy
